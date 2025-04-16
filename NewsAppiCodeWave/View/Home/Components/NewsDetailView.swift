@@ -12,23 +12,43 @@ struct NewsDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 20) {
                 Text(news.headline)
-                    .font(.title)
-                    .bold()
+                    .font(.system(.title, design: .rounded))
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 4)
                 
-                Text("By \(news.author) • \(news.date)")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                HStack {
+                    Image(systemName: "person.fill")
+                        .foregroundColor(.blue)
+                    Text(news.author)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "calendar")
+                        .foregroundColor(.gray)
+                    Text(news.date)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.bottom, 4)
                 
                 Divider()
                 
                 Text(news.body.stripHTML)
-                    .font(.body)
+                    .font(.system(.body, design: .serif))
+                    .lineSpacing(6)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
             }
             .padding()
         }
-        .navigationTitle("Detail")
+        .navigationTitle("News")
         .navigationBarTitleDisplayMode(.inline)
+        .background(Color(.systemGroupedBackground))
     }
 }
